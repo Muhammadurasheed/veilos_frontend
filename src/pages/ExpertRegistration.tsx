@@ -73,7 +73,7 @@ const ExpertRegistration = () => {
   const [step, setStep] = useState<'details' | 'experience' | 'documents' | 'availability' | 'preferences' | 'verification'>('details');
   const [expertId, setExpertId] = useState<string | null>(null);
   const [apiBaseUrl, setApiBaseUrl] = useState(() => {
-    return import.meta.env.VITE_API_BASE_URL || 'https://veilo-backend.onrender.com/api';
+    return import.meta.env.VITE_API_BASE_URL || 'https://veilos-backend.onrender.com';
   });
   const [availabilitySchedule, setAvailabilitySchedule] = useState<Record<string, string[]>>({
     monday: [],

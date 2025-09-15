@@ -76,7 +76,7 @@ class EnhancedSocketService {
 
     this.connectionPromise = new Promise((resolve, reject) => {
       try {
-        const serverUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+        const serverUrl = import.meta.env.VITE_API_URL || 'https://veilos-backend.onrender.com';
         
         const authToken = token || 
           localStorage.getItem('admin_token') || 

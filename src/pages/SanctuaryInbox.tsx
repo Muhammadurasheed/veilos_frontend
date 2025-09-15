@@ -183,7 +183,7 @@ const SanctuaryInbox = () => {
         }
         
         // Try to access as host
-        const apiUrl = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '' : 'http://localhost:3000');
+        const apiUrl = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '' : 'https://veilos-backend.onrender.com');
         const response = await fetch(`${apiUrl}/api/sanctuary/sessions/${sessionId}/host`, {
           headers: {
             'x-host-token': hostToken,

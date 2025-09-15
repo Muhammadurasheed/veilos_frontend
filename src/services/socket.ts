@@ -12,7 +12,7 @@ class SocketService {
 
     this.connectionPromise = new Promise((resolve, reject) => {
       try {
-        const serverUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+        const serverUrl = import.meta.env.VITE_API_URL || 'https://veilos-backend.onrender.com';
         
         // Prioritize admin token, then provided token, then regular auth token
         const authToken = token || 

@@ -117,7 +117,7 @@ export const useFlagshipSanctuary = (options: UseFlagshipSanctuaryOptions = {}):
     if (socketRef.current) return;
 
     const token = localStorage.getItem('auth_token');
-    const socket = io(import.meta.env.VITE_BACKEND_URL || (import.meta.env.DEV ? '' : 'http://localhost:3000'), {
+    const socket = io(import.meta.env.VITE_BACKEND_URL || (import.meta.env.DEV ? '' : 'https://veilos-backend.onrender.com'), {
       auth: { token },
       transports: ['websocket', 'polling']
     });

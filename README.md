@@ -51,8 +51,9 @@ This project is built with:
 3. **Environment Setup**
    Create a `.env` file in the root directory:
    ```env
-   VITE_API_BASE_URL=http://localhost:3000
-   VITE_SOCKET_URL=http://localhost:3000
+   VITE_API_BASE_URL=https://veilos-backend.onrender.com
+   VITE_BACKEND_URL=https://veilos-backend.onrender.com
+   VITE_API_URL=https://veilos-backend.onrender.com
    VITE_AGORA_APP_ID=your_agora_app_id
    ```
 
@@ -162,8 +163,9 @@ The frontend communicates with the backend through:
 - `@/*` resolves to `./src/*` for cleaner imports
 
 ### Environment Variables
-- `VITE_API_BASE_URL` - Backend API base URL
-- `VITE_SOCKET_URL` - WebSocket server URL
+- `VITE_API_BASE_URL` - Backend API base URL (https://veilos-backend.onrender.com)
+- `VITE_BACKEND_URL` - Backend server URL for Socket.io connections
+- `VITE_API_URL` - Alternative API URL for compatibility
 - `VITE_AGORA_APP_ID` - Agora application ID
 
 ## Contributing

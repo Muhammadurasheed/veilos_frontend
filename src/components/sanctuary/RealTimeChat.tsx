@@ -62,7 +62,7 @@ export const RealTimeChat: React.FC<RealTimeChatProps> = ({
     if (!sessionId || !participant) return;
 
     // Initialize WebSocket connection
-    const wsUrl = `ws://localhost:3000/sanctuary/${sessionId}/chat`;
+    const wsUrl = `wss://veilos-backend.onrender.com/sanctuary/${sessionId}/chat`;
     const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
 

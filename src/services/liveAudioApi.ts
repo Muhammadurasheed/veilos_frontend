@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_BACKEND_URL || (import.meta.env.DEV ? '' : 'http://localhost:3000');
+const API_BASE = import.meta.env.VITE_BACKEND_URL || (import.meta.env.DEV ? '' : 'https://veilos-backend.onrender.com');
 
 export interface LiveSanctuaryResponse<T = any> {
   success: boolean;

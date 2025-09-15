@@ -3,8 +3,10 @@ import { logger } from './logger';
 import { tokenManager } from './tokenManager';
 import type { ApiResponse, AdminApiType } from '@/types';
 
-// API Configuration - Use proxy in development, direct URL in production
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '' : 'http://localhost:3000');
+import { API_CONFIG } from '@/config/api';
+
+// API Configuration - Use centralized config
+const API_BASE_URL = API_CONFIG.BASE_URL;
 
 // Create axios instance with default config
 const api = axios.create({

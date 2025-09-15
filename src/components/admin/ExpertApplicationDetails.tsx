@@ -66,7 +66,7 @@ const DocumentViewer = ({ document }: DocumentViewerProps) => {
       const filename = document.fileUrl.split('/').pop();
       
       // Use the secure admin route for document viewing
-      const secureUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/admin/documents/view/${filename}`;
+      const secureUrl = `${import.meta.env.VITE_API_URL || 'https://veilos-backend.onrender.com'}/api/admin/documents/view/${filename}`;
       
       // Open in new tab with authorization
       const newTab = window.open();

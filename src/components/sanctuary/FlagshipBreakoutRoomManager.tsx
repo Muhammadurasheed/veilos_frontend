@@ -346,6 +346,17 @@ export const FlagshipBreakoutRoomManager: React.FC<FlagshipBreakoutRoomManagerPr
                   >
                     🧪
                   </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={async () => {
+                      const { runDeploymentTests } = await import('@/utils/deploymentTest');
+                      await runDeploymentTests();
+                    }}
+                    title="Test Backend Connection"
+                  >
+                    🔗
+                  </Button>
                 </>
               )}
               

@@ -34,7 +34,7 @@ export const useSanctuarySocket = ({
 
   useEffect(() => {
     // Initialize socket connection
-    const socket = io(import.meta.env.VITE_BACKEND_URL || (import.meta.env.DEV ? '' : 'http://localhost:3000'), {
+    const socket = io(import.meta.env.VITE_BACKEND_URL || (import.meta.env.DEV ? '' : 'https://veilos-backend.onrender.com'), {
       auth: {
         token: localStorage.getItem('token')
       }
