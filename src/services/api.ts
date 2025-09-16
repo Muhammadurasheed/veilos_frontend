@@ -40,6 +40,11 @@ api.interceptors.request.use(
     const authHeaders = tokenManager.getAuthHeaders();
     Object.assign(config.headers, authHeaders);
     
+    // Ensure proper content type for CORS
+    if (!config.headers['Content-Type']) {
+      config.headers['Content-Type'] = 'application/json';
+    }
+    
     logger.apiRequest(config.method?.toUpperCase() || 'UNKNOWN', config.url || '', config.data);
     return config;
   },

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Status Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .loading { background-color: #fff3cd; border-color: #ffeaa7; }
+        button { padding: 10px 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Veilo Backend Status Test</h1>
+    <p>Testing connection to: <strong>https://veilos-backend.onrender.com</strong></p>
+    
+    <button onclick="testBackend()">Test Backend Connection</button>
+    <button onclick="testCORS()">Test CORS</button>
+    <button onclick="testLogin()">Test Login Endpoint</button>
+    
+    <div id="results"></div>
+
+    <script>
+        const BACKEND_URL = 'https://veilos-backend.onrender.com';
+        const FRONTEND_ORIGIN = window.location.origin;
+        
+        function addResult(title, status, message, details = '') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test ${status}`;
+            div.innerHTML = `
+                <h3>${title}</h3>
+                <p><strong>Status:</strong> ${status.toUpperCase()}</p>
+                <p><strong>Message:</strong> ${message}</p>
+                ${details ? `<pre>${details}</pre>` : ''}
+            `;
+            results.appendChild(div);
+        }
+        
+        async function testBackend() {
+            document.getElementById('results').innerHTML = '';
+            addResult('Backend Health Check', 'loading', 'Testing...');
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/health`);
+                const data = await response.json();
+                
+                addResult(
+                    'Backend Health Check', 
+                    'success', 
+                    'Backend is running!',
+                    JSON.stringify(data, null, 2)
+                );
+            } catch (error) {
+                addResult(
+                    'Backend Health Check', 
+                    'error', 
+                    'Backend is not responding',
+                    error.message
+                );
+            }
+        }
+        
+        async function testCORS() {
+            addResult('CORS Test', 'loading', 'Testing CORS configuration...');
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/health`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Origin': FRONTEND_ORIGIN
+                    }
+                });
+                
+                const data = await response.json();
+                
+                addResult(
+                    'CORS Test', 
+                    'success', 
+                    'CORS is working correctly!',
+                    `Response: ${JSON.stringify(data, null, 2)}`
+                );
+            } catch (error) {
+                addResult(
+                    'CORS Test', 
+                    'error', 
+                    'CORS is blocking requests',
+                    error.message
+                );
+            }
+        }
+        
+        async function testLogin() {
+            addResult('Login Endpoint Test', 'loading', 'Testing login endpoint...');
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Origin': FRONTEND_ORIGIN
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'testpassword'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.status === 400 || response.status === 401) {
+                    addResult(
+                        'Login Endpoint Test', 
+                        'success', 
+                        'Login endpoint is accessible (failed with invalid credentials as expected)',
+                        `Status: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`
+                    );
+                } else {
+                    addResult(
+                        'Login Endpoint Test', 
+                        'success', 
+                        'Login endpoint responded',
+                        `Status: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`
+                    );
+                }
+            } catch (error) {
+                addResult(
+                    'Login Endpoint Test', 
+                    'error', 
+                    'Login endpoint is not accessible',
+                    error.message
+                );
+            }
+        }
+        
+        // Auto-run basic test on page load
+        window.onload = () => {
+            testBackend();
+        };
+    </script>
+</body>
+</html>
